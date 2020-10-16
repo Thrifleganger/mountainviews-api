@@ -1,6 +1,6 @@
 package com.thrifleganger.mountainviews.api.service;
 
-import com.thrifleganger.mountainviews.api.entity.County;
+import com.thrifleganger.mountainviews.api.entity.CountyEntity;
 import com.thrifleganger.mountainviews.api.repository.CountyRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -17,15 +17,15 @@ public class CountyService {
 
   private final CountyRepository countyRepository;
 
-  public List<County> findAll() {
+  public List<CountyEntity> findAll() {
     return countyRepository.findAll();
   }
 
-  public County findById(@NonNull UUID id) {
+  public CountyEntity findById(@NonNull UUID id) {
     return countyRepository.findById(id).orElseThrow(EntityNotFoundException::new);
   }
 
-  public Optional<County> findByName(@NonNull String name) {
+  public Optional<CountyEntity> findByName(@NonNull String name) {
     return countyRepository.findByName(name).stream().findFirst();
   }
 }

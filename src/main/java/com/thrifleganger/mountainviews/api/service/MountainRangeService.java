@@ -1,6 +1,6 @@
 package com.thrifleganger.mountainviews.api.service;
 
-import com.thrifleganger.mountainviews.api.entity.MountainRange;
+import com.thrifleganger.mountainviews.api.entity.MountainRangeEntity;
 import com.thrifleganger.mountainviews.api.repository.MountainRangeRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -17,15 +17,15 @@ public class MountainRangeService {
 
   private final MountainRangeRepository mountainRangeRepository;
 
-  public List<MountainRange> findAll() {
+  public List<MountainRangeEntity> findAll() {
     return mountainRangeRepository.findAll();
   }
 
-  public MountainRange findById(@NonNull UUID id) {
+  public MountainRangeEntity findById(@NonNull UUID id) {
     return mountainRangeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
   }
 
-  public Optional<MountainRange> findByName(@NonNull String name) {
+  public Optional<MountainRangeEntity> findByName(@NonNull String name) {
     return mountainRangeRepository.findByName(name).stream().findFirst();
   }
 }

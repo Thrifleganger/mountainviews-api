@@ -1,6 +1,5 @@
 package com.thrifleganger.mountainviews.api.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,15 +17,16 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class County {
+@Table(name = "mountain_range")
+public class MountainRangeEntity {
   @Id
   @GeneratedValue
   @Type(type="uuid-char")
   private UUID id;
   @Column(unique = true)
   private String name;
-  private String province;
+  private Integer numberOfMountains;
   @JsonBackReference
-  @OneToMany(mappedBy = "county")
-  private Set<Mountain> mountains;
+  @OneToMany(mappedBy = "mountainRange")
+  private Set<MountainEntity> mountains = new HashSet<>();
 }

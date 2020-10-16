@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -16,7 +15,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Mountain {
+@Table(name = "mountain")
+public class MountainEntity {
   @Id
   @GeneratedValue
   @Type(type="uuid-char")
@@ -40,9 +40,9 @@ public class Mountain {
   @JsonManagedReference
   @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
   @JoinColumn(columnDefinition = "countyId")
-  private County county;
+  private CountyEntity county;
   @JsonManagedReference
   @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
   @JoinColumn(columnDefinition = "mountainRangeId")
-  private MountainRange mountainRange;
+  private MountainRangeEntity mountainRange;
 }
