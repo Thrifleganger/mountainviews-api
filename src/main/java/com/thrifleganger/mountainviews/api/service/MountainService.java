@@ -1,5 +1,7 @@
 package com.thrifleganger.mountainviews.api.service;
 
+import com.sun.istack.Nullable;
+import com.thrifleganger.mountainviews.api.entity.MountainEntity;
 import com.thrifleganger.mountainviews.api.model.Mountain;
 import com.thrifleganger.mountainviews.api.model.What3WordsResponse;
 import com.thrifleganger.mountainviews.api.repository.MountainRepository;
@@ -8,6 +10,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -21,8 +24,11 @@ public class MountainService {
     private final MountainEntityToModelTransformer mountainEntityToModelTransformer;
     private final What3WordsService what3WordsService;
 
-    public Page<Mountain> findAll() {
-        return mountainRepository.findAll(PageRequest.of(0, 10))
+    public Page<Mountain> findAll(
+      @Nullable Specification<MountainEntity> specification,
+      @NonNull PageRequest pageRequest
+    ) {
+        return mountainRepository.findAll(specification, PageRequest.of(0, 10))
           .map(mountainEntityToModelTransformer::transform)
           .map(this::insertWhat3Words);
     }

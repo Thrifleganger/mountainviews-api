@@ -5,23 +5,26 @@ import com.thrifleganger.mountainviews.api.model.sub.Topography;
 import com.thrifleganger.mountainviews.api.model.sub.Unit;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.UUID;
 
 @Getter
 @Builder
-public class Mountain {
+public class Mountain extends RepresentationModel<Mountain> {
 
   private UUID id;
   private String name;
   private String irishName;
   private Location location;
+  private Double elevation;
   private Topography topography;
   private String description;
   private String mountainviewsLink;
-  private CountyBase county;
+  private County county;
+  private String country;
   private Unit unit;
-  private MountainRangeBase mountainRange;
+  private MountainRange mountainRange;
 
   public Mountain setWhat3Words(String text) {
     this.location.setWhat3words(text);
@@ -34,7 +37,7 @@ public class Mountain {
   }
 
   public Mountain setCountry(String text) {
-    this.county.setCountry(text);
+    this.country = text;
     return this;
   }
 }
